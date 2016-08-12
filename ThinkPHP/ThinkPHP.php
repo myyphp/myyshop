@@ -64,12 +64,15 @@ defined('CONF_PARSE')   or define('CONF_PARSE',     '');    // 配置文件解�
 defined('ADDON_PATH')   or define('ADDON_PATH',     APP_PATH.'Addon');
 
 // 系统信息
+//MAGIC_QUOTES_GPC 或者 magic_quotes_runtime 为on的时候，当数据遇到 单引号' 和 双引号" 以及 反斜线\ NULL时自动加上反斜线，进行自动转义
 if(version_compare(PHP_VERSION,'5.4.0','<')) {
     ini_set('magic_quotes_runtime',0);
     define('MAGIC_QUOTES_GPC',get_magic_quotes_gpc()? true : false);
 }else{
     define('MAGIC_QUOTES_GPC',false);
 }
+
+// PHP的运行方式（PHP SAPi）常见的SAPI有：cgi 、fast-cgi、cli、isapi、apache 模块的 DLL
 define('IS_CGI',(0 === strpos(PHP_SAPI,'cgi') || false !== strpos(PHP_SAPI,'fcgi')) ? 1 : 0 );
 define('IS_WIN',strstr(PHP_OS, 'WIN') ? 1 : 0 );
 define('IS_CLI',PHP_SAPI=='cli'? 1   :   0);
@@ -79,7 +82,7 @@ if(!IS_CLI) {
     if(!defined('_PHP_FILE_')) {
         if(IS_CGI) {
             //CGI/FASTCGI模式下
-            $_temp  = explode('.php',$_SERVER['PHP_SELF']);
+            $_temp  = explode('.php',$_SERVER['PHP_SELF']);     //$_SERVER['PHP_SELF'] 表示当前 php 文件相对于网站根目录的位置地址
             define('_PHP_FILE_',    rtrim(str_replace($_SERVER['HTTP_HOST'],'',$_temp[0].'.php'),'/'));
         }else {
             define('_PHP_FILE_',    rtrim($_SERVER['SCRIPT_NAME'],'/'));
@@ -92,6 +95,8 @@ if(!IS_CLI) {
 }
 
 // 加载核心Think类
-require CORE_PATH.'Think'.EXT;
+require CORE_PATH.'Think'.EXT;  // ThinkPHP/Library/Think/Think.class.php
 // 应用初始化 
 Think\Think::start();
+
+

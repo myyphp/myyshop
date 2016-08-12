@@ -30,12 +30,12 @@ class Think {
       // 注册AUTOLOAD方法
       spl_autoload_register('Think\Think::autoload');      
       // 设定错误和异常处理
-      register_shutdown_function('Think\Think::fatalError');
-      set_error_handler('Think\Think::appError');
-      set_exception_handler('Think\Think::appException');
+      register_shutdown_function('Think\Think::fatalError');    //注册定制的致命错误处理页面，脚本执行结束、有exit或者错误发生
+      set_error_handler('Think\Think::appError');               //注册错误定制处理
+      set_exception_handler('Think\Think::appException');       //注册自定义的未被捕获的异常处理
 
       // 初始化文件存储方式
-      Storage::connect(STORAGE_TYPE);
+      Storage::connect(STORAGE_TYPE);   //有文件和sae两种形式，默认是文件类型
 
       $runtimefile  = RUNTIME_PATH.APP_MODE.'~runtime.php';
       if(!APP_DEBUG && Storage::has($runtimefile)){
@@ -286,13 +286,14 @@ class Think {
         if (APP_DEBUG || IS_CLI) {
             //调试模式下输出错误信息
             if (!is_array($error)) {
-                $trace          = debug_backtrace();
+                $trace          = debug_backtrace(); //产生一条回溯信息，返回的是一个数组
                 $e['message']   = $error;
                 $e['file']      = $trace[0]['file'];
                 $e['line']      = $trace[0]['line'];
                 ob_start();
-                debug_print_backtrace();
-                $e['trace']     = ob_get_clean();
+                //
+                debug_print_backtrace();    //打印出一条回溯信息
+                $e['trace']     = ob_get_clean();   //把回溯信息从ob缓存区中取出来，并删除当前输出缓存
             } else {
                 $e              = $error;
             }
