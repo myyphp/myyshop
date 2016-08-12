@@ -39,8 +39,10 @@ class Think {
 
       $runtimefile  = RUNTIME_PATH.APP_MODE.'~runtime.php';
       if(!APP_DEBUG && Storage::has($runtimefile)){
+          //非调试模式下
           Storage::load($runtimefile);
       }else{
+          //调试模式下
           if(Storage::has($runtimefile))
               Storage::unlink($runtimefile);
           $content =  '';
