@@ -1,0 +1,38 @@
+<layout name="Index/header_footer" />
+
+        <div class="result-wrap">
+
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="__CONTROLLER__/add"><i class="icon-font"></i>添加权限</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr align='center'>
+                            <th width="20%">权限名称</th>
+                            <th>模块名称</th>
+                            <th>控制器名称</th>
+                            <th>方法名称</th>
+                            <th>上级权限的ID，0：代表顶级权限</th>
+                            <th>操作</th>
+                        </tr>
+						
+						<foreach name='data' item='vo'>
+                        <tr>
+                            <td>{$vo.pri_name}</td>
+                            <td>{$vo.module_name}</td>
+                            <td>{$vo.controller_name}</td>
+                            <td>{$vo.action_name}</td>
+                            <td>{$vo.parent_id}</td>
+                            <td>
+                                <a class="link-update" href="__CONTROLLER__/edit/id/{$vo.id}">修改</a>
+                                <a class="link-del" onclick="return confirm('您确定要删除吗')"  href="__CONTROLLER__/del/id/{$vo.id}">删除</a>
+                            </td>
+                        </tr>
+						</foreach>
+									
+                    </table>
+                </div>
+
+        </div>

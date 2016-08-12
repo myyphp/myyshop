@@ -1,0 +1,57 @@
+<layout name="Index/header_footer" />
+        <div class="search-wrap">
+            <div class="search-content">
+                <form action="#" method="post">
+                    <table class="search-tab">
+                        <tr>
+                            <th width="120">选择分类:</th>
+                            <td>
+                                <select name="search-sort" id="">
+                                    <option value="">全部</option>
+                                    
+                                </select>
+                            </td>
+                            <th width="70">关键字:</th>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+                            <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="result-wrap">
+
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="__MODULE__/Category/add"><i class="icon-font"></i>新增分类</a>
+                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th>分类名称</th>
+                            <th>上级分类</th>
+                            <th>操作</th>
+                        </tr>
+						
+						<foreach name='categories' item='vo'>
+                        <tr>
+                            <td>
+                            	<if condition="$vo.parent_id eq 0 "><b></if>
+                            	{$vo.level|str_repeat='--',###}{$vo.cat_name}
+								<if condition="$vo.parent_id eq 0 "></b></if>
+							</td>
+                            <td>{$vo.parent_name|default="顶级分类"}</td>
+                            <td>
+                                <a class="link-update" href="__CONTROLLER__/edit/id/{$vo.id}">修改</a>
+                                <a class="link-del" onclick="return confirm('您确定要删除吗')"  href="__CONTROLLER__/del/id/{$vo.id}">删除</a>
+                            </td>
+                        </tr>
+						</foreach>
+									
+                    </table>
+                </div>
+
+        </div>

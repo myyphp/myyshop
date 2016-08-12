@@ -1,0 +1,35 @@
+<layout name="Index/header_footer" />
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="__ACTION__" method="post" id="myform" name="myform">
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>角色名称：</th>
+                                <td>
+                                    <input class="common-text required" id="title" name="role_name" size="28" value="" type="text">
+                                </td>
+                            </tr>
+							<tr>
+                            <th width="120"><i class="require-red">*</i>分配权限：</th>
+                            <td>
+                                <?php foreach ($priData as $k => $v): ?>
+                    <?php echo str_repeat('-', $v['level'] * 4); ?>
+                	<input level="{$v.level}" type="checkbox" name="pri_id[]" value="{$v.id}" />{$v.pri_name} <br />
+                    <?php endforeach; ?>
+                            </td>
+                        </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    <!--/main-->
+</div>
