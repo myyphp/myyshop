@@ -1,9 +1,0 @@
-[ 2015-10-11T01:18:49+08:00 ] 127.0.0.1 /index.php/Gii
-INFO: [ app_init ] --START--
-INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
-INFO: [ app_init ] --END-- [ RunTime:0.000776s ]
-INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.084370s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.084519s ]
-ERR: 无法加载控制器:Gii
-
